@@ -1,0 +1,9 @@
+{
+	"name": "levelup",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "af1fb12d-4a94-4483-a674-911386973e33",
+		"tenantId": "2fdd511e-2db6-4d6b-9b48-4d1c1af1fcbc"
+	}
+}
