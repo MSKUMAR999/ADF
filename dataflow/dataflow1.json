@@ -1,0 +1,54 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "sort1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "sort2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Country as string,",
+				"          Population as integer,",
+				"          YearlyChange as string,",
+				"          NetChange as integer,",
+				"          Density as double,",
+				"          LandArea as integer,",
+				"          Migrants as integer,",
+				"          {Fert.Rate} as string,",
+				"          {Med.Age} as string,",
+				"          {UrbanPop%} as string,",
+				"          WorldShare as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"sort2 derive(Country = left(Country,3)) ~> derivedColumn1",
+				"derivedColumn1 sort(asc(Population, true)) ~> sort1",
+				"sort1 derive({E-MAIL} = 'shiva@gmail.com') ~> derivedColumn2",
+				"source1 sort(asc(Country, true)) ~> sort2"
+			]
+		}
+	}
+}
